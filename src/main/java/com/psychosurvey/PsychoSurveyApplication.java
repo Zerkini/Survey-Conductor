@@ -1,12 +1,12 @@
-package com.psychosurvey.psychosurvey;
+package com.psychosurvey;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PsychosurveyApplication {
+public class PsychoSurveyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PsychosurveyApplication.class, args);
+		SpringApplication.run(PsychoSurveyApplication.class, args);
 	}
 }

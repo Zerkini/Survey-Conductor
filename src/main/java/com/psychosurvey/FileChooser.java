@@ -11,7 +11,8 @@ public class FileChooser {
     public void chooseFile(){
         System.out.println("Enter the name of the file: ");
         File file = new File(readInput());
-        readFile(file);
+//        readFile(file);
+        XMLParser.parseXML(file);
     }
 
     private String readInput(){
@@ -37,6 +38,9 @@ public class FileChooser {
             e.printStackTrace();
         }
     }
+
+
+
 
 
 

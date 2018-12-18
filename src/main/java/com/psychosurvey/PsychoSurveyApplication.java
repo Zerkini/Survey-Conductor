@@ -8,12 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PsychoSurveyApplication implements CommandLineRunner {
 
-	private FileChooser fileChooser;
-
 	@Autowired
-	public void setFileChooser(FileChooser fileChooser){
-		this.fileChooser = fileChooser;
-	}
+	private FileChooser fileChooser;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PsychoSurveyApplication.class, args);

@@ -12,10 +12,15 @@ public class ScaleQuestion extends Question {
         this.maxScale = maxScale;
     }
 
+    public void setAnswer(int answer) {
+        this.answer = answer;
+    }
+
     @Override
     public String getQuestion() {
         StringBuilder fullQuestion = new StringBuilder(questionText);
-
-        return "";
+        fullQuestion.append("\n\nEnter an integer from 1 to ");
+        fullQuestion.append(maxScale);
+        return fullQuestion.toString();
     }
 }

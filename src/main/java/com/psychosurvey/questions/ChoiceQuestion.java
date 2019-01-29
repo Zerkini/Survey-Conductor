@@ -1,12 +1,32 @@
 package com.psychosurvey.questions;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
 
-import java.util.ArrayList;
+import static java.lang.Integer.parseInt;
 
-@Component
 public class ChoiceQuestion extends Question {
 
-    ArrayList<String> answers;
+    List<String> answers;
+
+    public String getChosenAnswer() {
+        return chosenAnswer;
+    }
+
+    public ChoiceQuestion(String questionText, List<String> answers) {
+        this.questionText = questionText;
+        this.answers = answers;
+    }
+
+    public void setChosenAnswer(String chosenAnswer) {
+        this.chosenAnswer = chosenAnswer;
+    }
+
+    @Override
+    public String getQuestion() {
+        StringBuilder fullQuestion = new StringBuilder(questionText);
+        answers.forEach(fullQuestion::append);
+        fullQuestion.append("\n\nEnter an integer corresponding to your answer: ");
+        return fullQuestion.toString();
+    }
 
 }

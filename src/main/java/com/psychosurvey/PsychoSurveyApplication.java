@@ -9,7 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PsychoSurveyApplication implements CommandLineRunner {
 
 	@Autowired
-	private FileChooser fileChooser;
+	private SurveyManager surveyManager;
+
+	@Autowired
+	private ExampleSurvey exampleSurvey;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PsychoSurveyApplication.class, args);
@@ -17,6 +20,6 @@ public class PsychoSurveyApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String[] args) {
-		fileChooser.chooseFile();
+		surveyManager.conductSurvey(exampleSurvey);
 	}
 }

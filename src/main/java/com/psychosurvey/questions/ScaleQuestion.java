@@ -1,19 +1,20 @@
 package com.psychosurvey.questions;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class ScaleQuestion extends Question {
 
     int maxScale;
-    int answer;
 
-    public ScaleQuestion(int maxScale) {
+    public ScaleQuestion(String questionText, int maxScale) {
+        this.questionText = questionText;
         this.maxScale = maxScale;
     }
 
-    public void setAnswer(int answer) {
-        this.answer = answer;
+    public String getChosenAnswer() {
+        return chosenAnswer;
+    }
+
+    public void setChosenAnswer(String chosenAnswer) {
+        this.chosenAnswer = chosenAnswer;
     }
 
     @Override
@@ -23,4 +24,5 @@ public class ScaleQuestion extends Question {
         fullQuestion.append(maxScale);
         return fullQuestion.toString();
     }
+
 }

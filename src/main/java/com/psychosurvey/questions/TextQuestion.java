@@ -1,11 +1,10 @@
 package com.psychosurvey.questions;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class TextQuestion extends Question {
 
-    String answer;
+    public TextQuestion(String questionText) {
+        this.questionText = questionText;
+    }
 
     @Override
     public String getQuestion() {
@@ -14,7 +13,12 @@ public class TextQuestion extends Question {
         return fullQuestion.toString();
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public String getChosenAnswer() {
+        return chosenAnswer;
     }
+
+    public void setChosenAnswer(String chosenAnswer) {
+        this.chosenAnswer = chosenAnswer;
+    }
+
 }

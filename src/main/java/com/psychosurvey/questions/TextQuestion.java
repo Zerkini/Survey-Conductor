@@ -2,14 +2,15 @@ package com.psychosurvey.questions;
 
 public class TextQuestion extends Question {
 
-    public TextQuestion(String questionText) {
+    public TextQuestion(int id, String questionText) {
+        this.id = id;
         this.questionText = questionText;
     }
 
     @Override
     public String getQuestion() {
         StringBuilder fullQuestion = new StringBuilder(questionText);
-        fullQuestion.append("\n\nWrite your answer: ");
+        fullQuestion.append("\n\nNapisz swoją odpowiedź: ");
         return fullQuestion.toString();
     }
 

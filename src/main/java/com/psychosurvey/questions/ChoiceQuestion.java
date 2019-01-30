@@ -1,8 +1,7 @@
 package com.psychosurvey.questions;
 
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
+import java.util.stream.IntStream;
 
 public class ChoiceQuestion extends Question {
 
@@ -12,7 +11,8 @@ public class ChoiceQuestion extends Question {
         return chosenAnswer;
     }
 
-    public ChoiceQuestion(String questionText, List<String> answers) {
+    public ChoiceQuestion(int id, String questionText, List<String> answers) {
+        this.id = id;
         this.questionText = questionText;
         this.answers = answers;
     }
@@ -24,9 +24,12 @@ public class ChoiceQuestion extends Question {
     @Override
     public String getQuestion() {
         StringBuilder fullQuestion = new StringBuilder(questionText);
-        answers.forEach(fullQuestion::append);
-        fullQuestion.append("\n\nEnter an integer corresponding to your answer: ");
+        IntStream.rangeClosed(1, answers.size()).
+                forEach(i -> fullQuestion.append("\n" + i +"." + answers.get(i)));
+        fullQuestion.append("\n\nPodaj numer Twojej odpowiedzi: ");
         return fullQuestion.toString();
     }
+
+
 
 }

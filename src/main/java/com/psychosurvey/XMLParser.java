@@ -1,5 +1,9 @@
 package com.psychosurvey;
 
+import com.psychosurvey.questions.ChoiceQuestion;
+import com.psychosurvey.questions.Question;
+import com.psychosurvey.questions.ScaleQuestion;
+import com.psychosurvey.questions.TextQuestion;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,11 +13,16 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 @Component
 public class XMLParser {
 
-    public static void parseXML(File file) {
+    public static Survey parseXML(File file) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         Document document = null;
         try {
@@ -24,31 +33,44 @@ public class XMLParser {
             System.out.println("SUCKS");
         }
 
-        System.out.println("Root element :" + document.getDocumentElement().getNodeName());
-        NodeList nList = document.getElementsByTagName("survey");
-        System.out.println("----------------------------");
-
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
-            System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
+        NodeList nodeList = document.getElementsByTagName("question");
+        List<Question> questions = new ArrayList<>();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node nNode = nodeList.item(i);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) nNode;
-                NodeList childNodes = eElement.getChildNodes();
-
-                System.out.println("Question : "
-                        + eElement.getAttribute("question"));
-//                System.out.println("First Name : "
-//                        + eElement
-//                        .getElementsByTagName("firstname")
-//                        .item(0)
-//                        .getTextContent());
-//                System.out.println("Marks : "
-//                        + eElement
-//                        .getElementsByTagName("marks")
-//                        .item(0)
-//                        .getTextContent());
+                Element element = (Element) nNode;
+                questions.add(createQuestion(element));
             }
         }
+        return new Survey(questions);
     }
+
+    private static Question createQuestion(Element element){
+        String questionType = element.getElementsByTagName("questionType").item(0).getTextContent();
+        if (questionType.equals("scale")){
+            return createScaleQuestion(element);
+        }
+        else if(questionType.equals("text")){
+            return createTextQuestion(element);
+        }
+        else if(questionType.equals("choice")){
+            return createChoiceQuestion(element);
+        }
+        return null;
+    }
+
+    private static Question createScaleQuestion(Element element) {
+        return new ScaleQuestion(parseInt(element.getAttribute("id")), element.getElementsByTagName("questionText").item(0).getTextContent(), parseInt(element.getElementsByTagName("maxScale").item(0).getTextContent()));
+    }
+
+    private static Question createChoiceQuestion(Element element) {
+        String[] answers = element.getElementsByTagName("answers").item(0).getTextContent().split("/");
+        return new ChoiceQuestion(parseInt(element.getAttribute("id")), element.getElementsByTagName("questionText").item(0).getTextContent(), Arrays.asList(answers));
+    }
+
+    private static Question createTextQuestion(Element element) {
+        return new TextQuestion(parseInt(element.getAttribute("id")), element.getElementsByTagName("questionText").item(0).getTextContent());
+    }
+
+
 }

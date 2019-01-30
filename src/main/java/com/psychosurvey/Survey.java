@@ -10,6 +10,10 @@ public class Survey {
 
     List<Question> questions = new ArrayList<>();
 
+    public Survey(List<Question> questions) {
+        this.questions = questions;
+    }
+
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }

@@ -14,27 +14,26 @@ public class PsychoSurveyApplication implements CommandLineRunner {
 	private SurveyManager surveyManager;
 
 	@Autowired
-	private ExampleSurvey exampleSurvey;
+	private FileChooser fileChooser;
 
 	private static String username;
 
+
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-
-		//  prompt for the user's name
 		System.out.print("Enter your name: ");
-
-		// get their input as a String
 		username = scanner.next();
-
-		System.out.println(username);
-			SpringApplication.run(PsychoSurveyApplication.class, args);
+		System.err.close();
+		System.setErr(System.out);
+		SpringApplication.run(PsychoSurveyApplication.class, args);
 	}
 
 	@Override
 	public void run(String[] args) {
-		if (username != null) {
-			surveyManager.conductSurvey(exampleSurvey);
-		}
+//		if (username != null) {
+//			surveyManager.conductSurvey(exampleSurvey);
+		surveyManager.conductSurvey(fileChooser.chooseFile(), username);
+//		}
 	}
 }
+

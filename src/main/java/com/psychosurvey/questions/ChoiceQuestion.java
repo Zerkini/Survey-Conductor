@@ -25,7 +25,7 @@ public class ChoiceQuestion extends Question {
     public String getQuestion() {
         StringBuilder fullQuestion = new StringBuilder(questionText);
         IntStream.rangeClosed(1, answers.size()).
-                forEach(i -> fullQuestion.append("\n" + i +"." + answers.get(i)));
+                forEach(i -> fullQuestion.append("\n" + i +"." + answers.get(i - 1)));
         fullQuestion.append("\n\nPodaj numer Twojej odpowiedzi: ");
         return fullQuestion.toString();
     }

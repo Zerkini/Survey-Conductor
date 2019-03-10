@@ -30,10 +30,9 @@ public class PsychoSurveyApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String[] args) {
-//		if (username != null) {
-//			surveyManager.conductSurvey(exampleSurvey);
-		surveyManager.conductSurvey(fileChooser.chooseFile(), username);
-//		}
+		if (username != null) {
+			surveyManager.conductSurvey(fileChooser.chooseFile(), username);
+		}
 	}
 }
 

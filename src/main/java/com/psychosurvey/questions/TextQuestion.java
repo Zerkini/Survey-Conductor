@@ -10,7 +10,7 @@ public class TextQuestion extends Question {
     @Override
     public String getQuestion() {
         StringBuilder fullQuestion = new StringBuilder(questionText);
-        fullQuestion.append("\n\nNapisz swoją odpowiedź: ");
+        fullQuestion.append("\n\nNapisz swoja odpowiedz: ");
         return fullQuestion.toString();
     }
 

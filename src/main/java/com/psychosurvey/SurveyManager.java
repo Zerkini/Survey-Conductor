@@ -1,54 +1,57 @@
 package com.psychosurvey;
 
+import com.psychosurvey.questions.IntroductoryQuestion;
 import com.psychosurvey.questions.Question;
 import org.springframework.stereotype.Component;
 
+import javax.swing.JFrame;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.IntStream;
 
 @Component
-public class SurveyManager {
+public class SurveyManager extends JFrame {
 
-    PrintWriter writer = null;
+    private PrintWriter writer = null;
+    private int questionIndex = 0;
+    private List<Question> questions;
 
-    public void conductSurvey(Survey survey, String username){
-        List<Question> questions = survey.getRandomizedQuestions();
 
-        questions.forEach(this::askQuestion);
+    public void conductSurvey(Survey survey, Window window){
+        window.setSurveyManager(this);
+        questions = survey.getRandomizedQuestions();
+        IntroductoryQuestion introductoryQuestion = new IntroductoryQuestion();
+        questions.add(0, introductoryQuestion);
+        nextQuestion(questions.get(questionIndex));
+    }
+
+    private void finishSurvey(List<Question> questions){
         try {
-            writer = new PrintWriter("survey.txt", "UTF-8");
+            writer = new PrintWriter("badanie-wynik.txt", "UTF-8");
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         Collections.sort(questions);
-        writer.println(username + "\n");
         questions.forEach(question -> writer.println(question.getQuestionWithAnswer() + "\n"));
         writer.close();
         System.exit(0);
     }
 
-    private void askQuestion(Question question) {
+    private void nextQuestion(Question question) {
         System.out.println(question.getQuestion());
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        question.setChosenAnswer(input);
-//        clearScreen();
     }
 
-    private static void clearScreen() {
-//        System.out.print("\033[H\033[2J");
-        try {
-            Runtime.getRuntime().exec("cls");
-        } catch (IOException e) {
-            IntStream.rangeClosed(1, 100).forEach(i -> System.out.println());
+    public void receiveAnswer(String text) {
+        Question question = questions.get(questionIndex);
+        question.setChosenAnswer(text);
+        questionIndex++;
+        if(this.questionIndex == questions.size()){
+            finishSurvey(questions);
+        }
+        else{
+            nextQuestion(questions.get(questionIndex));
         }
     }
-
-
 }

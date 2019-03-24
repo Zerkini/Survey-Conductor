@@ -30,7 +30,7 @@ public class XMLParser {
             document = documentBuilder.parse(file);
             document.getDocumentElement().normalize();
         } catch (Exception e) {
-            System.out.println("SUCKS");
+            System.out.println("FILE NOT FOUND");
         }
 
         NodeList nodeList = document.getElementsByTagName("question");

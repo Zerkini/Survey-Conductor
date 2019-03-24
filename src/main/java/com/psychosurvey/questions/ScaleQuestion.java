@@ -21,9 +21,8 @@ public class ScaleQuestion extends Question {
     @Override
     public String getQuestion() {
         StringBuilder fullQuestion = new StringBuilder(questionText);
-        fullQuestion.append("\n\nOceń i wpisz liczbę, na ile prawdopodobne jest wystąpienie poniższych sytuacji. \n" +
-                "Jeden (1) oznacza sytuację mało prawdopodobną, a dziesięć (" + maxScale + ") sytuację bardzo prawdopodobną.");
-        fullQuestion.append(maxScale);
+        fullQuestion.append("\n\nOcen i wpisz liczbe, na ile prawdopodobne jest wystapienie ponizszych sytuacji. \n" +
+                "Jeden (1) oznacza sytuacje malo prawdopodobna, a dziesiec (" + maxScale + ") sytuacje bardzo prawdopodobna.");
         return fullQuestion.toString();
     }
 

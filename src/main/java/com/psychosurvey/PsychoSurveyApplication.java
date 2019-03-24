@@ -1,38 +1,33 @@
 package com.psychosurvey;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 @SpringBootApplication
-public class PsychoSurveyApplication implements CommandLineRunner {
+public class PsychoSurveyApplication extends JFrame{
 
-	@Autowired
-	private SurveyManager surveyManager;
 
-	@Autowired
-	private FileChooser fileChooser;
+	private static SurveyManager surveyManager;
+	private static FileChooser fileChooser;
+	private static Window window;
 
-	private static String username;
-
+	public PsychoSurveyApplication(FileChooser fileChooser, SurveyManager surveyManager, Window window){
+		PsychoSurveyApplication.fileChooser = fileChooser;
+		PsychoSurveyApplication.surveyManager = surveyManager;
+		PsychoSurveyApplication.window = window;
+	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Enter your name: ");
-		username = scanner.next();
-		System.err.close();
-		System.setErr(System.out);
-		SpringApplication.run(PsychoSurveyApplication.class, args);
-	}
+		ConfigurableApplicationContext ctx = new SpringApplicationBuilder(PsychoSurveyApplication.class)
+				.headless(false).run(args);
 
-	@Override
-	public void run(String[] args) {
-		if (username != null) {
-			surveyManager.conductSurvey(fileChooser.chooseFile(), username);
-		}
+		EventQueue.invokeLater(() -> {
+			PsychoSurveyApplication ex = ctx.getBean(PsychoSurveyApplication.class);
+		});
+		surveyManager.conductSurvey(fileChooser.chooseFile(), window);
 	}
 }
-

@@ -18,7 +18,7 @@ public abstract class Question implements Comparable<Question>{
 
     public String getQuestionWithAnswer(){
         StringBuilder questionWithAnswer = new StringBuilder(getQuestion());
-        questionWithAnswer.append("\nAnswer:\n" + this.chosenAnswer);
+        questionWithAnswer.append("\nOdpowiedz:\n" + this.chosenAnswer);
         return questionWithAnswer.toString();
     }
 

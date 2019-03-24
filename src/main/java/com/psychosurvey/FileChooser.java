@@ -9,14 +9,7 @@ import java.util.Scanner;
 public class FileChooser {
 
     public Survey chooseFile(){
-        System.out.println("Enter the name of the file: ");
-        File file = new File(readInput());
+        File file = new File("badanie-pytania.xml");
         return XMLParser.parseXML(file);
-    }
-
-    private String readInput(){
-        Scanner scanner = new Scanner(System.in);
-        String fileName = scanner.nextLine();
-        return fileName;
     }
 }

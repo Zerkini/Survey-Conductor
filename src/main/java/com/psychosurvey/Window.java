@@ -44,7 +44,7 @@ public class Window extends JPanel{
         add(scrollPane2, gridBagConstraints);
         add(nextQuestionButton, gridBagConstraints);
 
-        frame = new JFrame("TextDemo");
+        frame = new JFrame("Badanie");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(this);
@@ -63,7 +63,7 @@ public class Window extends JPanel{
         });
     }
 
-    public void setSurveyManager(SurveyManager surveyManager) {
+    void setSurveyManager(SurveyManager surveyManager) {
         this.surveyManager = surveyManager;
     }
 }

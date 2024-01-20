@@ -1,9 +1,8 @@
-package com.psychosurvey;
+package zerkinisoft;
 
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.util.Scanner;
 
 @Component
 public class FileChooser {

@@ -1,20 +1,15 @@
-package com.psychosurvey;
+package zerkinisoft;
 
-import com.psychosurvey.questions.Question;
+import zerkinisoft.questions.Question;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Survey {
 
-    List<Question> questions = new ArrayList<>();
+    List<Question> questions;
 
     public Survey(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 

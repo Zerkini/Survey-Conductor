@@ -1,4 +1,4 @@
-package com.psychosurvey.questions;
+package zerkinisoft.questions;
 
 public class IntroductoryQuestion extends Question {
 

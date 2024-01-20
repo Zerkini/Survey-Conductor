@@ -1,4 +1,4 @@
-package com.psychosurvey.questions;
+package zerkinisoft.questions;
 
 public class TextQuestion extends Question {
 
@@ -9,13 +9,7 @@ public class TextQuestion extends Question {
 
     @Override
     public String getQuestion() {
-        StringBuilder fullQuestion = new StringBuilder(questionText);
-        fullQuestion.append("\n\nNapisz swoja odpowiedz: ");
-        return fullQuestion.toString();
-    }
-
-    public String getChosenAnswer() {
-        return chosenAnswer;
+        return questionText + "\n\nNapisz swoja odpowiedz: ";
     }
 
     public void setChosenAnswer(String chosenAnswer) {

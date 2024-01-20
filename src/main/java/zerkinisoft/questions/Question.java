@@ -1,4 +1,4 @@
-package com.psychosurvey.questions;
+package zerkinisoft.questions;
 
 import org.springframework.stereotype.Component;
 
@@ -17,19 +17,11 @@ public abstract class Question implements Comparable<Question>{
     }
 
     public String getQuestionWithAnswer(){
-        StringBuilder questionWithAnswer = new StringBuilder(getQuestion());
-        questionWithAnswer.append("\nOdpowiedz:\n" + this.chosenAnswer);
-        return questionWithAnswer.toString();
+        return getQuestion() + "\nOdpowiedz:\n" + this.chosenAnswer;
     }
 
     @Override
     public int compareTo(Question question) {
-        if(this.id < question.getId()){
-            return -1;
-        }
-        else if (this.id == question.getId()){
-            return 0;
-        }
-        else return 1;
+        return Integer.compare(this.id, question.getId());
     }
 }

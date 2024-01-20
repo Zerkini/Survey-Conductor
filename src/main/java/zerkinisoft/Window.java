@@ -1,4 +1,4 @@
-package com.psychosurvey;
+package zerkinisoft;
 
 import org.springframework.stereotype.Component;
 
@@ -17,17 +17,14 @@ import java.io.PrintStream;
 @Component
 public class Window extends JPanel{
 
-    private JTextArea textArea;
-    private static JFrame frame;
-    private CustomOutputStream customOutputStream;
-    private JButton nextQuestionButton = new JButton("Zatwierdź");
+    private final JTextArea textArea;
     private SurveyManager surveyManager;
 
     public Window() throws HeadlessException {
         super(new GridBagLayout());
         textArea = new JTextArea(20, 100);
         textArea.setEditable(false);
-        customOutputStream = new CustomOutputStream(textArea);
+        CustomOutputStream customOutputStream = new CustomOutputStream(textArea);
         PrintStream printStream = new PrintStream(customOutputStream);
         System.setOut(printStream);
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -36,15 +33,15 @@ public class Window extends JPanel{
 
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(scrollPane, gridBagConstraints);
         add(scrollPane2, gridBagConstraints);
+        JButton nextQuestionButton = new JButton("Zatwierdź");
         add(nextQuestionButton, gridBagConstraints);
 
-        frame = new JFrame("Badanie");
+        JFrame frame = new JFrame("Badanie");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(this);

@@ -1,4 +1,4 @@
-package com.psychosurvey;
+package zerkinisoft;
 
 import javax.swing.JTextArea;
 import java.io.OutputStream;

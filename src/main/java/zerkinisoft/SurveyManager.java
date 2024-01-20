@@ -1,7 +1,7 @@
-package com.psychosurvey;
+package zerkinisoft;
 
-import com.psychosurvey.questions.IntroductoryQuestion;
-import com.psychosurvey.questions.Question;
+import zerkinisoft.questions.IntroductoryQuestion;
+import zerkinisoft.questions.Question;
 import org.springframework.stereotype.Component;
 
 import javax.swing.JFrame;

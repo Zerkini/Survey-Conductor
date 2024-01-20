@@ -1,9 +1,9 @@
-package com.psychosurvey;
+package zerkinisoft;
 
-import com.psychosurvey.questions.ChoiceQuestion;
-import com.psychosurvey.questions.Question;
-import com.psychosurvey.questions.ScaleQuestion;
-import com.psychosurvey.questions.TextQuestion;
+import zerkinisoft.questions.ChoiceQuestion;
+import zerkinisoft.questions.Question;
+import zerkinisoft.questions.ScaleQuestion;
+import zerkinisoft.questions.TextQuestion;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -47,14 +47,13 @@ public class XMLParser {
 
     private static Question createQuestion(Element element){
         String questionType = element.getElementsByTagName("questionType").item(0).getTextContent();
-        if (questionType.equals("scale")){
-            return createScaleQuestion(element);
-        }
-        else if(questionType.equals("text")){
-            return createTextQuestion(element);
-        }
-        else if(questionType.equals("choice")){
-            return createChoiceQuestion(element);
+        switch (questionType) {
+            case "scale":
+                return createScaleQuestion(element);
+            case "text":
+                return createTextQuestion(element);
+            case "choice":
+                return createChoiceQuestion(element);
         }
         return null;
     }
